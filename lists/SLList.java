@@ -8,13 +8,13 @@ public class SLList {
             item = i;
             next = n;
         }
-        public int size(){
+        /*public int size(){
             if (next == null){
                 return 1;
             } else {
                 return 1 + next.size();
             }
-        }
+        }*/
     }
 
     private IntNode first;
@@ -42,13 +42,20 @@ public class SLList {
         p.next = new IntNode(x, null);
     }
 
+    private static int size(IntNode p){
+        if (p.next == null) {
+            return 1;
+        }
+        return 1 + size(p.next);
+    }
     /** Returns the number of items in the list using recursion. */
     public int size() {
-        if (first == null) {
+        return size(first);
+        /*if (first == null) {
             return 0;
         } else {
             return first.size();
-        }
+        }*/
     }
 
 
