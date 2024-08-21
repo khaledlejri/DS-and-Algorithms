@@ -1,11 +1,24 @@
 package lists;
 
 public class SLList {
-    private IntNode first; //this is accessed only in SLList file
+    /*this is accessed only in SLList file
+    The first item (if it exists) is at sentinel.next
+    */
+    private IntNode sentinel;
     private int size;
 
+    /**
+     * creates an empty list
+     * @param x
+     */
+    public SLList() {
+        sentinel = new IntNode(63, null);
+        size = 0;
+    }
+
     public SLList(int x) {
-        first = new IntNode(x, null);
+        sentinel = new IntNode(63, null);
+        sentinel.next = new IntNode(x, null);
         size = 1;
     }
 
@@ -32,23 +45,23 @@ public class SLList {
 
     /** Adds an item to the front of the list. */
     public void addFirst(int x) {
-        first = new IntNode(x, first);
+        sentinel.next = new IntNode(x, sentinel.next);
         size += 1;
     }
 
     /** Retrieves the front item from the list. */
     public int getFirst() {
-        return first.item;
+        return sentinel.next.item;
     }
 
     /** Adds an item to the end of the list. */
     public void addLast(int x) {
-        IntNode p = this.first;
+        size += 1;
+        IntNode p = sentinel;
         while (p.next != null){
             p = p.next;
         }
         p.next = new IntNode(x, null);
-        size += 1;
     }
 
     /**
@@ -61,22 +74,18 @@ public class SLList {
      * @param p
      * @return
      */
+    /*
     private static int size(IntNode p){
         if (p.next == null) {
             return 1;
         }
         return 1 + size(p.next);
     }
-    /** Returns the number of items in the list using recursion. */
-    public int size() {
-        return size(first);
-        /*if (first == null) {
-            return 0;
-        } else {
-            return first.size();
-        }*/
-    }
 
+    public int size() {
+        return size(sentinel);
+    }
+*/
 
     public static void main(String[] args) {
         SLList L = new SLList(10);
@@ -84,7 +93,6 @@ public class SLList {
         L.addFirst(20);
         System.out.println(L.getFirst());
         L.addLast(434);
-        System.out.println("Size of SLList is: " + L.size());
         System.out.println("Size using caching gives:" + L.size);
     }
 }
