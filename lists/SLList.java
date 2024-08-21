@@ -1,7 +1,20 @@
 package lists;
 
 public class SLList {
-    public class IntNode {
+    private IntNode first; //this is accessed only in SLList file
+    private int size;
+
+    public SLList(int x) {
+        first = new IntNode(x, null);
+        size = 1;
+    }
+
+    /**
+     * this nested class does not need to access any of the members
+     * of the enclosing class SLList
+     * so we add the keyword static
+     */
+    public static class IntNode {
         public int item;
         public IntNode next;
         public IntNode(int i, IntNode n) {
@@ -17,15 +30,10 @@ public class SLList {
         }*/
     }
 
-    private IntNode first;
-
-    public SLList(int x) {
-        first = new IntNode(x, null);
-    }
-
     /** Adds an item to the front of the list. */
     public void addFirst(int x) {
         first = new IntNode(x, first);
+        size += 1;
     }
 
     /** Retrieves the front item from the list. */
@@ -40,8 +48,19 @@ public class SLList {
             p = p.next;
         }
         p.next = new IntNode(x, null);
+        size += 1;
     }
 
+    /**
+     * The recursive call for size in IntList was straightforward:
+     * return 1 + this.rest.size().
+     * For a SLList, this approach does not make sense.
+     * A SLList has no rest variable. Instead, we'll use a common pattern that is
+     * used with middleman classes like SLList -- we'll create a private helper method
+     * that interacts with the underlying naked recursive data structure.
+     * @param p
+     * @return
+     */
     private static int size(IntNode p){
         if (p.next == null) {
             return 1;
@@ -66,5 +85,6 @@ public class SLList {
         System.out.println(L.getFirst());
         L.addLast(434);
         System.out.println("Size of SLList is: " + L.size());
+        System.out.println("Size using caching gives:" + L.size);
     }
 }
