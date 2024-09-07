@@ -1,22 +1,22 @@
 package lists;
 
-public class AList {
+public class AList<Item> {
     private int size;
-    private int[] items;
+    private Item[] items;
     /** creates an empty list */
     public AList(){
-        items = new int[100];
+        items = (Item[]) new Object[100];
         size = 0;
     }
     /** Resizes the underlying array to the target capacity */
     private void resizeArray(int capacity){
-            int[] biggerArray = new int[capacity];
+            Item[] biggerArray = (Item[]) new Object[capacity];
             System.arraycopy(items, 0, biggerArray, 0, size);
             biggerArray[size] = x;
             items = biggerArray;
     }
 
-    public void addLast(int x){
+    public void addLast(Item x){
         if(size == items.length) {
             resizeArray(2 * size);
         }
@@ -24,20 +24,20 @@ public class AList {
         size += 1;
     }
 
-    public int getLast(){
+    public Item getLast(){
         return items[size - 1];
     }
 
     /** gets the ith item in the list ( 0 is the front) */
-    public int get(int i) {
+    public Item get(Item i) {
         return items[i];
     }
 
     public int size(){
         return size;
     }
-    public int removeLast(){
-        int x = getLast();
+    public Item removeLast(){
+        Item x = getLast();
         size -= 1;
         return x;
     }
